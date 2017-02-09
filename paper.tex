@@ -268,34 +268,27 @@ Email: me@christoph-heiss.me}}
 
 
 \begin{abstract}
-This publication introduces fl0w, an alternative\\ development environment for the KIPR Wallaby.\\ The aim of fl0w is to improve the robotics development\\ experience. It focuses on the components that make up fl0w, namely a file synchronization protocol that maintains a consistent state across all connected controllers, a route based and data type preserving network protocol with peer-to-peer piping capabilities, a discovery protocol that connects all controllers together automatically, a Sublime Text \cite{Sublime Text 3:Sublime HQ} plugin which enables in-line sensor readouts, program execution, program editing, and keyboard shortcuts, and a browser-based management front-end to manage the fl0w fleet.\\
+This publication introduces fl0w, an alternative\\ development environment for the KIPR Wallaby.\\ The aim of fl0w is to improve the robotics program development experience. It focuses on the components that make up fl0w, namely a file synchronization protocol that maintains a consistent state across all connected controllers, a route based and data type preserving network protocol with peer-to-peer piping capabilities, a discovery protocol that connects all controllers together automatically, a Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin which enables in-line sensor readouts, program execution, program editing, and keyboard shortcuts, and a browser-based management front-end to manage the controller fleet.\\
 \end{abstract}
 
 \begin{IEEEkeywords}
-file synchronization, networking, LAN discovery
+file synchronization, networking, LAN discovery, development environment
 \end{IEEEkeywords}
 
 
 
 \section{Introduction}
-% no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+fl0w was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers to a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, and a management layer inside the text editor as well as a browser-based interface. 
 
-\hfill mds
- 
-\hfill August 26, 2015
+\section{Implementation}
+All fl0w components emphasize shared code and are therefor written in Python 3.3.6\cite{Python 3.3.6:Python Foundation} to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby controller with acceptable speed. A pre-compiled version of Python 3.3.6 \cite{Python 3.3.6:Python Foundation} is bundled with the fl0w installer because it is not present on the Wallaby by default. All fl0w components are designed as libraries to allow for integration into other projects.
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\section{Components}
+\subsection{undergr0und}
+undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous route based and data type preserving network protocol with peer-to-peer piping capabilities. The Python\cite{Python 3.3.6:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov}. It was created to mitigate the problems fl0ws explorative development style created. Instead of one monolithic network protocol, undergr0und consists of many small sub protocols. This was done because all monolithic design would at some point become too inconsistent. undergr0und\cite{undergr0und:Philip Trauner} manages itself through its own capabilities. 
 
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\subsubsection{Pipes}
+Pipes are client peer-to-peer messages piped through the server. 
 
 
 % An example of a floating figure using the graphicx package.
@@ -408,6 +401,7 @@ The conclusion goes here.
 \section*{Acknowledgment}
 The authors would like to thank the robotics team robot0nfire: Nico Kratky, Nico Leidenfrost,\\ Sebastian Schaffler, Christine Zeh, Sascha Zemann;\\ Dr. Michael Stifter for making the existence of our team possible; Daniel Maximilian Swoboda for answering all paper related questions; the KIPR development team without whom the Wallaby Controller would not exist.
 
+\section*{Acknowledgment}
 
 
 
@@ -439,6 +433,24 @@ The authors would like to thank the robotics team robot0nfire: Nico Kratky, Nico
 \bibitem{Sublime Text 3:Sublime HQ}
 Sublime HQ, \emph{Sublime Text 3}, \url{https://www.sublimetext.com/3},\\ product page,
 accessed February 9th 2017
+
+\bibitem{Harrogate:KIPR}
+KIPR, \emph{Harrogate}, \url{https://github.com/kipr/harrogate},\\ source code,
+accessed February 9th 2017
+
+\bibitem{Python 3.3.6:Python Foundation}
+Python Foundation, \emph{Python 3.3.6}, \url{https://www.python.org/downloads/release/python-336/}, source code, accessed February 9th 2017
+
+\bibitem{undergr0und:Philip Trauner}
+Philip Trauner, \emph{undergr0und}, \url{https://github.com/robot0nfire/fl0w/wiki/undergr0und}, implementation notes, accessed February 9th 2017
+
+\bibitem{ws4py:Philip Trauner}
+Philip Trauner, \emph{ws4py}, \url{https://github.com/robot0nfire/ws4py}, source code, accessed February 9th 2017
+
+\bibitem{The WebSocket Protocol:A. Melnikov}
+A. Melnikov, \emph{The WebSocket Protocol}, \url{https://tools.ietf.org/html/rfc6455}, implementation notes, accessed February 9th 2017
+
+
 
 \end{thebibliography}
 
