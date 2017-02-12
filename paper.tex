@@ -74,14 +74,16 @@ file synchronization, networking, LAN discovery, development environment
 
 
 \section{Introduction}
-fl0w was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers to a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, and a management layer inside the text editor as well as a browser-based interface. 
+fl0w was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, programming, real-time in-line sensor readouts, and robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, and a browser-based front-end. 
 
 \section{Implementation}
-All fl0w components emphasize shared code and are therefor written in Python 3.3.6\cite{Python 3.3.6:Python Foundation} to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby controller with acceptable speed. A pre-compiled version of Python 3.3.6 \cite{Python 3.3.6:Python Foundation} is bundled with the fl0w installer because it is not present on the Wallaby by default. All fl0w components are designed as libraries to allow for integration into other projects.
+All fl0w components emphasize shared code and are therefor written in Python 3.3.6\cite{Python 3.3.6:Python Foundation} to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby controller with acceptable speed. A pre-compiled version of Python 3.3.6 \cite{Python 3.3.6:Python Foundation} is bundled with the fl0w installer because it is not present on the Wallaby by default. All fl0w components are designed as libraries to allow for integration into other projects. fl0w utilities a client-server networking model with random server assignment.
 
 \section{Components}
+\subsection{behem0th}
+
 \subsection{undergr0und}
-undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous route based and data type preserving network protocol with peer-to-peer piping capabilities. 
+undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous, route based, largely programming language agnostic, and data type preserving network protocol with peer-to-peer piping capabilities. 
 It automatically converts data into a transferable format and prepends binary headers to allow for reconstruction on the other end. 
 
 \begin{figure}[H]
@@ -98,7 +100,7 @@ It automatically converts data into a transferable format and prepends binary he
 The Python\cite{Python 3.3.6:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov} (in arraybuffer mode). It was created to mitigate the problems fl0ws explorative development style created. Instead of one monolithic network protocol, undergr0und consists of many small sub protocols. This was done because all monolithic designs became too inconsistent. undergr0und\cite{undergr0und:Philip Trauner} manages itself through its own concepts. 
 
 \subsubsection{Exchange table}
-To reduce the required additional bandwidth per message that is introduced with variable character count routes a numbered route lookup table is generated on startup by clients and the server. Before any communication takes place these lookup tables are exchanged. Route ID 0 is reserved by undergr0und\cite{undergr0und:Philip Trauner} for self management purposes. 
+To reduce the required additional bandwidth per message that is introduced with variable character count routes a numbered route lookup table is generated on startup by clients and the server. Before any communication takes place these lookup tables are exchanged. Route ID 0 is reserved for self management purposes. 
 
 \begin{figure}[H]
 \centering
@@ -118,9 +120,28 @@ The original type of the data segment is present inside the header $($see Figure
 A client$\,\to\,$server / server$\,\to\,$client construct. 
 
 \subsubsection{Pipe}
-A client$\,\to\,$server$\,\to\,$client construct. Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available.
-Pipe messages are packaged inside regular route messages with additional headers in the data segment. An optional server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. 
+A client$\,\to\,$server$\,\to\,$client construct. Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available. This approach allows for more flexibility if additional host-metadata has to be provided.
+Pipe messages are packaged inside regular route messages with additional headers in the data segment. An optional server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. The original sender ID is always included for a possible response.
 
+\subsection{dashb0ard}
+
+\subsection{edit0r}
+edit0r is the Sublime Text 3 plugin. It is modeled as a fl0w client and allows for remote robot management, source code synchronization as well as in line sensor readouts. It also provides quick access to dashb0ard, which is convenient because the IP addresses of controllers aren't necessarily static. behem0th\cite{behem0th:Christoph Heiss} is embedded into edit0r and enables the source code synchronization.  
+
+\subsubsection{Robot selection}
+
+
+\subsubsection{Robot management}
+Botball programs can be started (keyboard shortcut: F8) and/or stopped (keyboard shortcut: F9). An identification sound can be invoked and the hostname of a controller can be set.
+
+\subsubsection{In-line sensor readouts}
+Invocations of the functions "analog" and "digital" are located every time the content of a view has changed and all required sensor ports are transmitted to the currently selected controller. The controller keeps track of all subscriptions to sensors and transmits the appropriate values to the Sublime Text\cite{Sublime Text 3:Sublime HQ} plugin.  
+In-line sensor readouts can be toggled on a per view basis with a keyboard shortcut (default F10). 
+
+\subsection{disc0very}
+fl0w is using a traditional client-server networking model but because of it's distributed nature the server is chosen randomly. This is implemented with UDP broadcasts that coordinate which controllers become clients and which controller becomes the server. 
+
+\subsection{r0adrunner}
 
 \section{Conclusion}
 The conclusion goes here.
@@ -143,6 +164,9 @@ accessed February 9th 2017
 \bibitem{Python 3.3.6:Python Foundation}
 Python Foundation, \emph{Python 3.3.6}, \url{https://www.python.org/downloads/release/python-336/}, source code, accessed February 9th 2017
 
+\bibitem{behem0th:Christoph Heiss}
+Christoph Heiss, \emph{behem0th}, \url{https://github.com/robot0nfire/behem0th}, source code, accessed February 9th 2017
+
 \bibitem{undergr0und:Philip Trauner}
 Philip Trauner, \emph{undergr0und}, \url{https://github.com/robot0nfire/fl0w/wiki/undergr0und}, implementation notes, accessed February 9th 2017
 
@@ -154,8 +178,6 @@ A. Melnikov, \emph{The WebSocket Protocol}, \url{https://tools.ietf.org/html/rfc
 
 \bibitem{JSON:T. Bray Ed.}
 T. Bray, Ed., \emph{JSON}, \url{https://tools.ietf.org/html/rfc7159}, request for comment, accessed February 9th 2017
-
-
 
 \end{thebibliography}
 
