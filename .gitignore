@@ -1,20 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @PhilipTrauner
- Watch 1,943
-  Unstar 46,163
- Fork 19,094 github/gitignore
- Code  Pull requests 111  Projects 0  Pulse  Graphs
-Branch: master Find file Copy pathgitignore/TeX.gitignore
-913d29f  on 8 Jan
-@shiftkey shiftkey Merge pull request #2222 from yassu/delete-leading-blank
-36 contributors @maieul @shiftkey @koppor @arcresu @habi @lszeremeta @tjgrilley @seungwonpark @153957 @wojciechwasko @vbalnt @thomwiggers @thilaire @rogierslag @ptigwe @vkusvody @yassu @masgo @dopefishh @lucasgautheron @lighght @Konfekt @izuzak @Gurmeet-Singh @JelteF @flashspys and others
-RawBlameHistory     
-221 lines (173 sloc)  2.13 KB
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -235,5 +218,3 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
