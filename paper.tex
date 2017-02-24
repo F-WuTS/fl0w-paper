@@ -9,6 +9,7 @@
 \usepackage{url}
 \usepackage{array}
 \usepackage{cite}
+\usepackage{microtype}
 
 % Centered columns
 \newcolumntype{V}{>{\bf\centering\arraybackslash} m{.2\linewidth} }
@@ -79,13 +80,12 @@ file synchronization, networking, LAN discovery, development environment
 
 
 \section{Introduction}
-fl0w was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, programming, real-time in-line sensor readouts, and robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, a browser-based front-end and the ability to connect to a wireless access point from withing a grahical user interface.
+fl0w was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, programming as well as robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, a browser-based front-end and the ability to connect to a wireless access point.
 
 \section{Implementation}
-All fl0w components emphasize shared code and are therefor written in Python 3.3.6\cite{Python 3.3.6:Python Foundation} to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby controller with acceptable speed. A pre-compiled version of Python \cite{Python 3.3.6:Python Foundation} is bundled with the fl0w installer because it is not present on the Wallaby by default. All fl0w components are designed as libraries to allow for integration into other projects. fl0w utilities a client-server networking model with random server assignment.
+All fl0w components emphasize shared code and are therefor written in Python 3.3.6\cite{Python 3.3.6:Python Foundation} to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby controller with acceptable speed. A pre-compiled version of Python \cite{Python 3.3.6:Python Foundation} is bundled with the fl0w installer, r0adrunner, because it is not present on the Wallaby by default. All fl0w components are designed as libraries to allow for integration into other projects. fl0w utilities a client-server networking model with random server assignment.
 
 \section{Components}
-\subsection{behem0th}
 
 \subsection{undergr0und}
 undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous, route based, largely programming language agnostic, and data type preserving network protocol with peer-to-peer piping capabilities.
@@ -128,8 +128,19 @@ A client$\,\to\,$server / server$\,\to\,$client construct.
 A client$\,\to\,$server$\,\to\,$client construct. Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available. This approach allows for more flexibility if additional peer-metadata has to be provided.
 Pipe messages are packaged inside regular route messages with additional headers in the data segment. A server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. The original sender ID is always included for a possible response.
 
+\subsection{behem0th}
+behem0th is a continuous network file synchronization protocol developed out of the need for an embeddable solution that would not require an additional background program to be present on the system running Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, instead utilizing its plugin environment. It uses a client-server networking model without peer-to-peer capabilities to stay in line with undergr0und.
+
+
+\subsubsection{Synchronization}
+Files are synchronized based on modification time and md5 hash. Sync conflicts are resolved on the server.
+
+\subsubsection{Transfer}
+behem0th neither sends nor receives files as a whole, instead it transmits the file size followed by data block which are written to a temporary file on disk. This is done to allow the transfer of files that are large enough to cause out of system memory situations.
+
+
 \subsection{dashb0ard}
-dashb0ard is a single-page web front-end designed to manage the fl0w fleet. It can be used to configure every connected controller and obtain information from them. It utilises the JavaScript version of undergr0und to retrieve data from fl0w, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for DOM manipulation.
+dashb0ard is a single-page web front-end designed to manage the fl0w fleet. It can be used to configure connected controllers and obtain information from them. It utilities the JavaScript version of undergr0und to retrieve data from fl0w, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for DOM manipulation.
 
 \subsubsection{Sensor readouts}
 
@@ -148,7 +159,7 @@ Invocations of the functions "analog" and "digital" are located every time the c
 In-line sensor readouts can be toggled on a per view basis with a keyboard shortcut (default F10).
 
 \subsection{disc0very}
-fl0w is using a traditional client-server networking model but because of it's distributed nature the server is chosen randomly. This is implemented with UDP broadcasts that coordinate which controllers become clients and which controller becomes the server.
+fl0w is using a client-server networking model but because of it's distributed nature the server is chosen randomly. This is implemented with UDP broadcasts that coordinate which controllers become clients and which controller becomes the server.
 
 \subsection{r0adrunner}
 r0adrunner is the installer of fl0w.
