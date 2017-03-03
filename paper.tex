@@ -102,7 +102,10 @@ It automatically converts data into a transferable format and prepends binary he
 \end{figure}
 
 
-The Python\cite{Python 3.3.6:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov} in arraybuffer mode. It was created to mitigate the problems fl0ws explorative development style created. Instead of one monolithic network protocol, undergr0und emphasizes small sub protocols. This was done because all monolithic designs became too inconsistent. undergr0und\cite{undergr0und:Philip Trauner} manages itself through its own concepts.
+The Python\cite{Python 3.3.6:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov} in arraybuffer mode. Only the Python version can be started in server mode because It was created to mitigate the problems fl0ws explorative development style created. Instead of one monolithic network protocol, undergr0und emphasizes small sub protocols. This was done because all monolithic designs became too inconsistent. undergr0und\cite{undergr0und:Philip Trauner} manages itself through its own concepts.
+
+\subsubsection{undergr0und.js}
+undergr0und.js is the feature complete client-side JavaScript port of undergr0und. It utilizes node-jspack to unpack the binary messages it receives from the undergr0und server. It is based on the Python version.
 
 \subsubsection{Exchange table}
 To reduce the required additional bandwidth per message that is introduced with variable character count routes, a numbered route lookup table is generated on startup by clients and the server. Before any communication takes place these lookup tables are exchanged. Route ID 0 is reserved for self management purposes.
