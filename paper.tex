@@ -131,16 +131,19 @@ A client$\,\to\,$server$\,\to\,$client construct. Invoked with the {\color{deepg
 The original type of the data segment is present inside the header $($see Figure ~\ref{fig:undergr0und_header}$)$ to accurately reconstruct sent data on the other end. JSON\cite{JSON:T. Bray Ed.} is used to transfer lists and dictionaries, and regular ASCII encoded strings are utilized to transfer integers, floats, null/none types and strings.
 
 \subsection{behem0th}
-behem0th is a continuous network file synchronization protocol developed out of the need for an embeddable solution that would not require an additional background program to be present on the system running Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, instead utilizing its plugin environment. It uses a client-server networking model without peer-to-peer capabilities to stay in line with undergr0und. It uses regular sockets instead of WebSockets\cite{The WebSocket Protocol:A. Melnikov} because the in-browser components of fl0w never interact with it. File system events are detected with watchdog\cite{watchdog:Yesudeep Mangalapilly}. \\
+behem0th is a continuous network file synchronization protocol developed out of the need for an embeddable solution that would not require an additional background program to be present on the system running Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, instead utilizing its plugin environment. It uses a client-server networking model without peer-to-peer capabilities to stay in line with undergr0und. It uses regular sockets instead of WebSockets\cite{The WebSocket Protocol:A. Melnikov} because the in-browser components of fl0w never interacts with it. The file-system is monitored using the watchdog\cite{watchdog:Yesudeep Mangalapilly} library.\\
 
 \subsubsection{Synchronization}
-Files are synchronized based on modification time and md5 hash. Sync conflicts are resolved on the server. Synchronization with a theoretically indefinite amount of clients is possible.\\
+On startup, behem0th synchronizes files based on their last modification time and MD5 hash. After that, files get synchronized to other clients as soon as a file-system event happens. Synchronization conflicts are resolved on the server and it is possible to use behem0th with a theoretically indefinite amount of clients.\\
 
 \subsubsection{Transfer}
 behem0th neither sends nor receives files as a whole, instead it transmits the file size followed by data block which are written to a temporary file on disk. This is done to allow the transfer of files that are large enough to cause out of system memory situations.\\
 
 \subsubsection{Protocol}
-behem0th is independent from underg0und and defines its own network protocol. It also utilizes different routes nonetheless, which are directly perpended to the data segment, for file list transmission as well as actual date transfers.
+behem0th is independent from underg0und and defines its own network protocol. It also utilizes different routes nonetheless, which are directly perpended to the data segment, for file list transmission as well as actual date transfers.\\
+
+\subsubsection{Security}
+Although MD5 is deprecated and known to suffers from extensive vulnerabilities, behem0th is designed to only run in a local network, which is controlled by the users of fl0w. This assumption also simplifies the implementation greatly.\\
 
 \begin{figure}[H]
 \centering
