@@ -75,21 +75,12 @@ showstringspaces=false
 \begin{document}
 
 \title{fl0w 2.0 - a development environment for the\\ KIPR Wallaby}
-\author{\IEEEauthorblockN{Philip Trauner}
-\IEEEauthorblockA{School of Computer Engineering\\
-HTBLuVA Wiener Neustadt\\
-Email: philip.trauner@arztpraxis.io}
-\and
-\IEEEauthorblockN{Christoph Heiss}
-\IEEEauthorblockA{School of Computer Engineering\\
-HTBLuVA Wiener Neustadt\\
-Email: me@christoph-heiss.me}
-\and
-\IEEEauthorblockN{Sebastian Schaffler}
-\IEEEauthorblockA{School of Computer Engineering\\
-HTBLuVA Wiener Neustadt\\
-Email: se.schaffler@gmail.com}}
-
+\author{\IEEEauthorblockN{Philip Trauner, Christoph Heiss, Sebastian Schaffler, Nico Kratky, Nico Leidenfrost, Christine Zeh, Sascha Zemann}
+\IEEEauthorblockA{Department for Computer Science\\
+Secondary Technical College\\
+Wiener Neustadt, Austria\\
+Email: philip.trauner@arztpraxis.io, me@christoph-heiss.me, se.schaffler@gmail.com, \\nico@nicokratky.me, leidenfrost.nico@gmail.com, krixizeh@gmail.com, sascha.zemann@gmail.com}
+}
 \maketitle
 
 
@@ -146,7 +137,7 @@ To reduce the required additional bandwidth per message that is introduced with 
 \end{figure}
 
 \subsubsection{Route}
-A client$\,\to\,$server / server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"send"} call. \newpage
+A client$\,\to\,$server / server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"send"} call.
 
 \subsubsection{Pipe}
 A client$\,\to\,$server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"pipe"} call. Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available. This approach allows for more flexibility if additional peer-metadata has to be provided. Pipe messages are packaged inside regular route messages with additional headers in the data segment. A server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. The original sender ID is always included for a possible response.\\
@@ -185,9 +176,7 @@ Although MD5 is deprecated and known to suffers from extensive vulnerabilities, 
 
 
 \subsection{dashb0ard}
-dashb0ard is a single-page web front-end designed to manage the fl0w fleet. It can be used to configure connected controllers and obtain sensor readouts as well as debug logs. It utilities the JavaScript version of undergr0und to retrieve data from fl0w, Vue.js for its user interface, Bootstrap 3\cite{Bootstrap 3:Twitter Inc.} as a design baseline, Charts.js to display graphs and jQuery\cite{jQuery:jQuery Foundation} for additional DOM manipulation.
-
-\subsubsection{Sensor readouts}
+dashb0ard is a single-page web front-end designed to manage the fl0w fleet. It can be used to configure connected controllers and obtain sensor readouts as well as debug logs. It utilities the JavaScript version of undergr0und to retrieve data from fl0w, Vue.js\cite{Vue:Evan You} for its user interface, Bootstrap 3\cite{Bootstrap 3:Twitter Inc.} as a design baseline, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for additional DOM manipulation.
 
 
 \subsection{edit0r}
@@ -204,8 +193,6 @@ Additionally, edit0r allows for modification of the controller hostname, playbac
 Invocations of the functions "analog" and "digital" are located every time the content of a view changes and the parameters of the calls are grouped across views. edit0r subscribes to all required sensor ports by requesting them from the currently selected controller. The controller keeps track of all subscriptions to sensors and continuously transmits the appropriate values to the Sublime Text\cite{Sublime Text 3:Sublime HQ} plugin. \\Sublime Text \cite{Sublime Text 3:Sublime HQ} phantoms are created as soon as new sensor values are available. This approach has the disadvantage of higher than usual processor utilization by edit0r, because phantoms were primarily designed to display infrequently updated content. To partially circumvent this, sensor readouts can be disabled and are not enabled by default.\\
 In-line sensor readouts can be toggled on a per view basis with a keyboard shortcut (default F10).\\
 
-\subsection{disc0very}
-fl0w is using a client-server networking model but because of it's distributed nature the server is chosen randomly. This is implemented with UDP broadcasts that coordinate which controllers become clients and which controller becomes the server.
 
 \subsection{r0adrunner}
 r0adrunner is the installer of fl0w. It is built to mimic a Wallaby controller software update to remain compatible with the preexisting update functionality found in Harrogate. It is implemented in Python 2.7, which is already installed on all Wallaby controllers but because fl0w utilizes features of Python 3.3 it installs a full-fledged precompiled version of Python 3.6.0. It also changes the Wallaby hostname to their unique manufacturing ID because fl0w utilizes hostnames to represent controllers in its user facing components. r0adrunner is distributed as an archive that has to be copied to an USB storage medium.
@@ -302,6 +289,11 @@ accessed February 9th 2017
 \bibitem{Bootstrap 3:Twitter Inc.}
 Twitter, Inc., \emph{Bootstrap 3}, \url{http://getbootstrap.com},\\ product page,
 accessed March 16th 2017
+
+\bibitem{Vue:Evan You}
+Evan You, \emph{Vue.js}, \url{https://vuejs.org/},\\ product page,
+accessed March 16th 2017
+
 
 \end{thebibliography}
 
