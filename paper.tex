@@ -47,6 +47,30 @@ showstringspaces=false
 {}
 
 
+% Define JSON language
+\lstdefinelanguage{json}
+{
+morestring=[b]" % defines that strings are enclosed in double quotes
+}
+
+% JSON style for highlighting
+\newcommand\jsonstyle{\lstset{
+language=json,
+basicstyle=\ttm,
+stringstyle=\color{deepgreen},
+frame=tb,
+showstringspaces=false
+}}
+
+% JSON environment
+\lstnewenvironment{json}[1][]
+{
+\jsonstyle
+\lstset{#1}
+}
+{}
+
+
 
 \begin{document}
 
@@ -137,23 +161,27 @@ behem0th is a continuous network file synchronization protocol developed out of 
 On startup, behem0th synchronizes files based on their last modification time and MD5 hash. After that, files get synchronized to other clients as soon as a file-system event happens. Synchronization conflicts are resolved on the server and it is possible to use behem0th with a theoretically indefinite amount of clients.\\
 
 \subsubsection{Transfer}
-behem0th neither sends nor receives files as a whole, instead it transmits the file size followed by data block which are written to a temporary file on disk. This is done to allow the transfer of files that are large enough to cause out of system memory situations.\\
+behem0th neither sends nor receives files as a whole, instead it transmits the file as small blocks (4096 bytes), which are written to a temporary file on disk as soon as they are received. This is done to allow the transfer of large files even in very memory-constrained environments.\\
 
 \subsubsection{Protocol}
-behem0th is independent from underg0und and defines its own network protocol. It also utilizes different routes nonetheless, which are directly perpended to the data segment, for file list transmission as well as actual date transfers.\\
-
-\subsubsection{Security}
-Although MD5 is deprecated and known to suffers from extensive vulnerabilities, behem0th is designed to only run in a local network, which is controlled by the users of fl0w. This assumption also simplifies the implementation greatly.\\
+behem0th is independent from underg0und and defines its own network protocol. It is completely text-based, uses UTF-8\cite{UTF-8:F. Yergeau} for character encoding and JSON\cite{JSON:T. Bray Ed.} as format encoding. behem0th is designed around 'requests' $($see Figure ~\ref{fig:behem0th_request}$)$ and 'routes'. Each request is a JSON-formatted string and separated by a newline.
 
 \begin{figure}[H]
 \centering
-	\begin{tabular}{*{2}{V}}
-		Data size & (Route) Data \\ \hline
-		4 & * \\
-	\end{tabular}
-	\caption{The binary encoding of behem0th (in bytes)}
-\label{fig:behem0th_header}
+\begin{json}
+{
+    "route": "<route-name>",
+    "data": "<route-specific data>"
+}
+\end{json}
+\caption{behem0th request}
+\label{fig:behem0th_request}
 \end{figure}
+
+A route can also send additional data if needed (a 'payload'). For binary data, base64\cite{Base64:S. Josefsson} encoding is used. After the payload, there is again a newline to delimit payload and the next request. \\
+
+\subsubsection{Security}
+Although MD5 is deprecated and known to suffers from extensive vulnerabilities, behem0th is designed to only run in a local network, which is controlled by the users of fl0w. This assumption also simplifies the implementation greatly.\\
 
 
 \subsection{dashb0ard}
@@ -239,9 +267,17 @@ accessed February 9th 2017
 Yesudeep Mangalapilly, \emph{watchdog}, \url{https://github.com/gorakhargosh/watchdog},\\ source code,
 accessed February 9th 2017
 
+\bibitem{UTF-8:F. Yergeau}
+F. Yergeau, \emph{UTF-8}, \url{https://tools.ietf.org/html/rfc3629},\\ request for comment,
+accessed March 22nd 2017
+
 \bibitem{JSON:T. Bray Ed.}
 T. Bray, Ed., \emph{JSON}, \url{https://tools.ietf.org/html/rfc7159},\\ request for comment,
 accessed February 9th 2017
+
+\bibitem{Base64:S. Josefsson}
+S. Josefsson, \emph{Base64}, \url{https://tools.ietf.org/html/rfc4648}, \\ request for comment,
+accessed March 22nd 2017
 
 \bibitem{bottle.py:Marcel Hellkamp}
 Marcel Hellkamp, \emph{bottle.py}, \url{https://github.com/bottlepy/bottle},\\ source code,
