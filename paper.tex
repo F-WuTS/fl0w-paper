@@ -77,12 +77,12 @@ showstringspaces=false
 
 \begin{document}
 
-\title{fl0w 2.0 - a development environment for the\\ KIPR Wallaby}
+\title{fl0w - a development environment for the\\ KIPR Wallaby}
 \author{\IEEEauthorblockN{Philip Trauner, Christoph Heiss, Sebastian Schaffler, Nico Kratky, Nico Leidenfrost, Christine Zeh, Sascha Zemann}
 \IEEEauthorblockA{Department for Computer Science\\
 Secondary Technical College\\
 Wiener Neustadt, Austria\\
-Email: philip.trauner@arztpraxis.io, me@christoph-heiss.me, se.schaffler@gmail.com, \\nico@nicokratky.me, leidenfrost.nico@gmail.com, krixizeh@gmail.com, sascha.zemann@gmail.com}
+Email: philip.trauner@arztpraxis.io, me@christoph-heiss.me, se.schaffler@gmail.com, \\nico@nicokratky.me, leidenfrost.nico@gmail.com, zeh.chrisi@gmail.com, sascha.zemann@gmail.com}
 }
 \maketitle
 
@@ -98,7 +98,7 @@ file synchronization, networking, LAN discovery, development environment
 
 
 \section{Introduction}
-fl0w\cite{fl0w:Philip Trauner} was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, programming as well as robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, a browser-based front-end and the ability to connect to a wireless access point.
+fl0w\cite{fl0w:Philip Trauner} was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, programming as well as robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, and a browser-based front-end.
 
 \section{Implementation}
 All fl0w\cite{fl0w:Philip Trauner} components emphasize shared code and are therefor written in Python\cite{Python:Python Foundation} 3.3.6 to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. \\Python\cite{Python:Python Foundation} was chosen as the implementation language for fl0w\cite{fl0w:Philip Trauner} because of its rich standard library and its lightweight virtual machine that can run on a Wallaby\cite{Wallaby Controller:KIPR} controller with acceptable speed. A pre-compiled version of Python\cite{Python:Python Foundation} is bundled with the fl0w\cite{fl0w:Philip Trauner} installer, r0adrunner, because it is not present on the Wallaby\cite{Wallaby Controller:KIPR} by default. \\All fl0w\cite{fl0w:Philip Trauner} components are designed as libraries to allow for integration into other projects. fl0w\cite{fl0w:Philip Trauner} utilities a client-server networking model with random server assignment. Client-server was chosen because the server can act as a data source for all clients.
@@ -110,7 +110,7 @@ undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous, route based, an
 It automatically converts data into a transferable format and prepends binary headers to allow for reconstruction on the other end.
 
 \begin{table}[H]
-\caption{The binary encoding of undergr0und (in bytes)}
+\caption{The binary encoding of messages in undergr0und (in bytes)}
 \centering
 	\begin{tabular}{*{3}{V}}
 		Data type & Route ID & Data \\ \hline
@@ -136,7 +136,7 @@ To reduce the required additional bandwidth per message that is introduced with 
 >>> create_exchange_map(routes)
 {0: "meta", 1: "echo", 2: "help"}
 \end{python}
-\caption{Creation of exchange maps}
+\caption{Creation of exchange maps used to lower bandwidth requirements}
 \end{figure}
 
 \subsubsection{Route}
@@ -168,7 +168,7 @@ behem0th\cite{behem0th:Christoph Heiss} is independent from underg0und and defin
     "data": "<route-specific data>"
 }
 \end{json}
-\caption{behem0th request}
+\caption{behem0th request encoding in JSON\cite{JSON:T. Bray Ed.}}
 \label{fig:behem0th_request}
 \end{figure}
 
@@ -227,7 +227,7 @@ In-line sensor readouts can be toggled on a per view basis with a keyboard short
 r0adrunner is the installer of fl0w\cite{fl0w:Philip Trauner}. \\It is built to mimic a Wallaby\cite{Wallaby Controller:KIPR} controller software update to remain compatible with the preexisting update functionality found in Harrogate\cite{Harrogate:KIPR}. It is implemented in Python\cite{Python:Python Foundation} 2.7, which is already installed on all Wallaby\cite{Wallaby Controller:KIPR} controllers but because fl0w\cite{fl0w:Philip Trauner} utilizes features of Python\cite{Python:Python Foundation} 3.3 it installs a full-fledged precompiled version of Python\cite{Python:Python Foundation} 3.6.0. \\It also changes the Wallaby\cite{Wallaby Controller:KIPR} hostname to their unique manufacturing ID because fl0w\cite{fl0w:Philip Trauner} utilizes hostnames to represent controllers in its user facing components. r0adrunner is distributed as an archive that has to be copied to an USB storage medium.
 
 \subsection{disc0very}
-
+disc0very is the networked controller discovery protocol of fl0w\cite{fl0w:Philip Trauner}. It utilizes UDP broadcasts to find and advertise controllers.
 
 \subsection{fl0w}
 fl0w\cite{fl0w:Philip Trauner} itself is the combination of all other components split into Wallaby\cite{Wallaby Controller:KIPR} client and server.\\
@@ -246,6 +246,8 @@ After prolonged testing it was deemed reasonable to claim that fl0w\cite{fl0w:Ph
 Networking boilerplate code can be cut down drastically with a fitting networking solution already in place.
 
 Security was never a design goal, instead relying on network interface level security was chosen to save time. This assumption will cause problems in densely populated wireless networks.
+
+Many edge cases can and will occur while performing continuous file-synchronization with an undetermined amount of clients across multiple operating-systems and file-systems.
 
 Support for Python\cite{Python:Python Foundation} as a robot programming language as well as basic remote procedure call functionality is the next development goal.
 
