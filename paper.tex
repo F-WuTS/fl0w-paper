@@ -227,10 +227,27 @@ In-line sensor readouts can be toggled on a per view basis with a keyboard short
 r0adrunner is the installer of fl0w\cite{fl0w:Philip Trauner}. \\It is built to mimic a Wallaby\cite{Wallaby Controller:KIPR} controller software update to remain compatible with the preexisting update functionality found in Harrogate\cite{Harrogate:KIPR}. It is implemented in Python\cite{Python:Python Foundation} 2.7, which is already installed on all Wallaby\cite{Wallaby Controller:KIPR} controllers but because fl0w\cite{fl0w:Philip Trauner} utilizes features of Python\cite{Python:Python Foundation} 3.3 it installs a full-fledged precompiled version of Python\cite{Python:Python Foundation} 3.6.0. \\It also changes the Wallaby\cite{Wallaby Controller:KIPR} hostname to their unique manufacturing ID because fl0w\cite{fl0w:Philip Trauner} utilizes hostnames to represent controllers in its user facing components. r0adrunner is distributed as an archive that has to be copied to an USB storage medium.
 
 \subsection{disc0very}
-disc0very is the controller discovery protocol of fl0w\cite{fl0w:Philip Trauner}. It utilizes UDP broadcasts to find and advertise controllers. It enables all fl0w\cite{fl0w:Philip Trauner} clients to connect together all the different Wallaby\cite{Wallaby Controller:KIPR} controllers and Sublime Text 3\cite{Sublime Text 3:Sublime HQ} clients automatically without any user interaction.\\
+disc0very\cite{disc0very:Christoph Heiss} is the LAN discovery protocol of fl0w\cite{fl0w:Philip Trauner}. It relies on UDP\cite{UDP:J. Postel} broadcasts to coordinate server and client assignment. Wallaby controller instances as well as the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin edit0r\cite{edit0r:Philip Trauner} utilize it to determine if there is already an active fl0w server on the network upon startup without user interaction.
 
-\subsubsection{discovery process}
-When fl0w starts up, discovery will at first listen for a certain timeout period for other controllers on the broadcast. If it detects a already running fl0w\cite{fl0w:Philip Trauner} server in the local network, it will simply connect to that server and become a regular client. If not, the controller itself will become the server and advertise it on the broadcast.
+
+\subsubsection{Discovery process}
+Upon launch disc0very\cite{disc0very:Christoph Heiss} listens for advertisements from an already running fl0w\cite{fl0w:Philip Trauner} server. If an advertisement is received the client-mode is engaged and a connection to the server is established. If no advertisement has been received after 2000ms server-mode is engaged. Server-mode can be disabled for clients that do not have the capability to become a server (for example edit0r\cite{edit0r:Philip Trauner}).
+
+\begin{figure}[H]
+\centering
+\begin{json}
+{
+    "address": "<address>",
+    "port": "<port>"
+}
+\end{json}
+\caption{disc0very advertisement encoding in JSON\cite{JSON:T. Bray Ed.}}
+\label{fig:discovery_advertisement}
+\end{figure}
+
+\subsubsection{Error recovery}
+disc0very\cite{disc0very:Christoph Heiss} actively listens for advertisements in server-mode to prevent more than one running server on the network. If a server receives an advertisement from another server both shutdown and return to discovery mode.
+
 
 \subsection{fl0w}
 fl0w\cite{fl0w:Philip Trauner} itself is the combination of all other components split into Wallaby\cite{Wallaby Controller:KIPR} client and server.\\
@@ -323,7 +340,7 @@ S. Josefsson, \emph{Base64}, \url{https://tools.ietf.org/html/rfc4648}, \\ reque
 accessed March 22nd 2017
 
 \bibitem{dashb0ard:Sebastian Schaffler}
-Sebastian Schaffler, Philip Trauner, \emph{dashb0ard}, \url{https://github.com/robot0nfire/dashb0ard},\\ source code,
+Sebastian Schaffler, Philip Trauner, \emph{dashb0ard}, \url{https://github.com/robot0nfire/dashb0ard}, source code,
 accessed March 16th 2017
 
 \bibitem{Vue:Evan You}
@@ -343,8 +360,13 @@ jQuery Foundation, \emph{jQuery}, \url{https://jquery.com/},\\ product page,
 accessed February 9th 2017
 
 \bibitem{edit0r:Philip Trauner}
-Philip Trauner, \emph{edit0r}, \url{https://github.com/robot0nfire/fl0w/tree/master/Sublime/fl0w},\\ source code,
-accessed February 9th 2017
+Philip Trauner, \emph{edit0r}, \url{https://github.com/robot0nfire/fl0w/tree/master/Sublime/fl0w},\\ source code, accessed February 9th 2017
+
+\bibitem{disc0very:Christoph Heiss}
+Christoph Heiss, \emph{disc0very}, \url{https://github.com/robot0nfire/fl0w/blob/master/Shared/Disc0very.py},\\ source code, accessed March 30th 2017
+
+\bibitem{UDP:J. Postel}
+J. Postel, \emph{UDP}, \url{https://www.ietf.org/rfc/rfc768.txt},\\ request for comment, accessed March 30th 2017
 
 \bibitem{behem0th:Christoph Heiss}
 Christoph Heiss, \emph{behem0th}, \url{https://github.com/robot0nfire/behem0th},\\ source code,
