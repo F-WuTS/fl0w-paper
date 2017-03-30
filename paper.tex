@@ -227,7 +227,10 @@ In-line sensor readouts can be toggled on a per view basis with a keyboard short
 r0adrunner is the installer of fl0w\cite{fl0w:Philip Trauner}. \\It is built to mimic a Wallaby\cite{Wallaby Controller:KIPR} controller software update to remain compatible with the preexisting update functionality found in Harrogate\cite{Harrogate:KIPR}. It is implemented in Python\cite{Python:Python Foundation} 2.7, which is already installed on all Wallaby\cite{Wallaby Controller:KIPR} controllers but because fl0w\cite{fl0w:Philip Trauner} utilizes features of Python\cite{Python:Python Foundation} 3.3 it installs a full-fledged precompiled version of Python\cite{Python:Python Foundation} 3.6.0. \\It also changes the Wallaby\cite{Wallaby Controller:KIPR} hostname to their unique manufacturing ID because fl0w\cite{fl0w:Philip Trauner} utilizes hostnames to represent controllers in its user facing components. r0adrunner is distributed as an archive that has to be copied to an USB storage medium.
 
 \subsection{disc0very}
-disc0very is the networked controller discovery protocol of fl0w\cite{fl0w:Philip Trauner}. It utilizes UDP broadcasts to find and advertise controllers.
+disc0very is the controller discovery protocol of fl0w\cite{fl0w:Philip Trauner}. It utilizes UDP broadcasts to find and advertise controllers. It enables all fl0w\cite{fl0w:Philip Trauner} clients to connect together all the different Wallaby\cite{Wallaby Controller:KIPR} controllers and Sublime Text 3\cite{Sublime Text 3:Sublime HQ} clients automatically without any user interaction.\\
+
+\subsubsection{discovery process}
+When fl0w starts up, discovery will at first listen for a certain timeout period for other controllers on the broadcast. If it detects a already running fl0w\cite{fl0w:Philip Trauner} server in the local network, it will simply connect to that server and become a regular client. If not, the controller itself will become the server and advertise it on the broadcast.
 
 \subsection{fl0w}
 fl0w\cite{fl0w:Philip Trauner} itself is the combination of all other components split into Wallaby\cite{Wallaby Controller:KIPR} client and server.\\
