@@ -88,7 +88,7 @@ Email: philip.trauner@arztpraxis.io, me@christoph-heiss.me, se.schaffler@gmail.c
 
 
 \begin{abstract}
-This publication introduces fl0w\cite{fl0w:Philip Trauner}, an alternative\\ development environment for the KIPR Wallaby\cite{Wallaby Controller:KIPR}.\\ The aim of fl0w\cite{fl0w:Philip Trauner} is to improve the robotics program development experience. It focuses on the components that make up fl0w\cite{fl0w:Philip Trauner}, namely a file synchronization protocol that maintains a consistent state across all connected controllers, a route based and data type preserving network protocol with peer-to-peer piping capabilities, a discovery protocol that connects all controllers together automatically, a Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin which enables in-line sensor readouts, program execution, program editing, and keyboard shortcuts, and a browser-based management front-end to manage the controller fleet.\\
+This publication introduces fl0w\cite{fl0w:Philip Trauner}, an alternative\\ development environment for the KIPR Wallaby\cite{Wallaby Controller:KIPR}.\\ The aim of fl0w\cite{fl0w:Philip Trauner} is to improve the Botball program development experience. It focuses on the components that make up fl0w\cite{fl0w:Philip Trauner}, namely a file synchronization protocol that maintains a consistent state across all connected controllers, a route based and data type preserving network protocol with peer-to-peer piping capabilities, a discovery protocol that connects all controllers together automatically, a Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin which enables in-line sensor readouts, program execution, program editing, and keyboard shortcuts, and a browser-based management front-end to manage the controller fleet.\\
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -101,12 +101,12 @@ file synchronization, networking, LAN discovery, development environment
 fl0w\cite{fl0w:Philip Trauner} was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, programming as well as robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, a browser-based front-end and the ability to connect to a wireless access point.
 
 \section{Implementation}
-All fl0w\cite{fl0w:Philip Trauner} components emphasize shared code and are therefor written in Python\cite{Python:Python Foundation} 3.3.6 to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. Python\cite{Python:Python Foundation} was chosen as the implementation language for fl0w\cite{fl0w:Philip Trauner} because of its rich standard library and its lightweight virtual machine that can run on a Wallaby\cite{Wallaby Controller:KIPR} controller with acceptable speed. A pre-compiled version of Python\cite{Python:Python Foundation} is bundled with the fl0w\cite{fl0w:Philip Trauner} installer, r0adrunner, because it is not present on the Wallaby\cite{Wallaby Controller:KIPR} by default. All fl0w\cite{fl0w:Philip Trauner} components are designed as libraries to allow for integration into other projects. fl0w\cite{fl0w:Philip Trauner} utilities a client-server networking model with random server assignment.
+All fl0w\cite{fl0w:Philip Trauner} components emphasize shared code and are therefor written in Python\cite{Python:Python Foundation} 3.3.6 to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. \\Python\cite{Python:Python Foundation} was chosen as the implementation language for fl0w\cite{fl0w:Philip Trauner} because of its rich standard library and its lightweight virtual machine that can run on a Wallaby\cite{Wallaby Controller:KIPR} controller with acceptable speed. A pre-compiled version of Python\cite{Python:Python Foundation} is bundled with the fl0w\cite{fl0w:Philip Trauner} installer, r0adrunner, because it is not present on the Wallaby\cite{Wallaby Controller:KIPR} by default. \\All fl0w\cite{fl0w:Philip Trauner} components are designed as libraries to allow for integration into other projects. fl0w\cite{fl0w:Philip Trauner} utilities a client-server networking model with random server assignment. Client-server was chosen because the server can act as a data source for all clients.
 
 \section{Components}
 
 \subsection{undergr0und}
-undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous, route based, largely programming language agnostic, and data type preserving network protocol with peer-to-peer piping capabilities.
+undergr0und\cite{undergr0und:Philip Trauner} is an asynchronous, route based, and data type preserving network protocol with peer-to-peer piping capabilities.
 It automatically converts data into a transferable format and prepends binary headers to allow for reconstruction on the other end.
 
 \begin{table}[H]
@@ -123,7 +123,7 @@ It automatically converts data into a transferable format and prepends binary he
 The Python\cite{Python:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov} in arraybuffer mode. It was created to mitigate the problems fl0ws\cite{fl0w:Philip Trauner}explorative development style created. Instead of one monolithic network protocol, undergr0und emphasizes small sub protocols. This was done because all monolithic designs became too inconsistent over time. undergr0und\cite{undergr0und:Philip Trauner} manages itself through its own concepts.\\
 
 \subsubsection{undergr0und.js}
-undergr0und.js\cite{undergr0und.js:Philip Trauner} is the feature complete client-side JavaScript port of undergr0und\cite{undergr0und:Philip Trauner} that was required for dashb0ard\cite{dashb0ard:Sebastian Schaffler}, the browser-based front-end for fl0w\cite{fl0w:Philip Trauner}. It utilizes node-jspack\cite{node-jspack:Peter Griess} to unpack the binary messages it receives from the undergr0und\cite{undergr0und:Philip Trauner} server. It is based on the Python\cite{Python:Python Foundation} version but does not implement the server because there is currently no need for that functionality. undergr0und.js can run be used in Node.js\cite{Node.js:Node.js Foundation} as well as browsers that support WebSockets\cite{The WebSocket Protocol:A. Melnikov}. browserify\cite{browserify:James Halliday} is used to create the browser version.\\
+undergr0und.js\cite{undergr0und.js:Philip Trauner} is the feature complete client-side JavaScript port of undergr0und\cite{undergr0und:Philip Trauner} that was required for dashb0ard\cite{dashb0ard:Sebastian Schaffler}, the browser-based front-end for fl0w\cite{fl0w:Philip Trauner}. \\It utilizes node-jspack\cite{node-jspack:Peter Griess} to unpack the binary messages it receives from the undergr0und\cite{undergr0und:Philip Trauner} server. It is based on the Python\cite{Python:Python Foundation} version but does not implement the server because there is currently no need for that functionality. \\undergr0und.js can run be used in Node.js\cite{Node.js:Node.js Foundation} as well as browsers that support WebSockets\cite{The WebSocket Protocol:A. Melnikov}. browserify\cite{browserify:James Halliday} is used to create the browser version.\\
 
 \subsubsection{Exchange table}
 To reduce the required additional bandwidth per message that is introduced with variable character count routes, a numbered route lookup table is generated on startup by clients and the server. Before any communication takes place these lookup tables are exchanged. Route ID 0 is reserved for self management purposes.\\
@@ -143,13 +143,13 @@ To reduce the required additional bandwidth per message that is introduced with 
 A client$\,\to\,$server / server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"send"} call.
 
 \subsubsection{Pipe}
-A client$\,\to\,$server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"pipe"} call. Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available. This approach allows for more flexibility if additional peer-metadata has to be provided. Pipe messages are packaged inside regular route messages with additional headers in the data segment. A server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. The original sender ID is always included for a possible response.\\
+A client$\,\to\,$server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"pipe"} call. \\Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available. This approach allows for more flexibility if additional peer-metadata has to be provided. \\Pipe messages are packaged inside regular route messages with additional headers in the data segment. A server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. The original sender ID is always included for a possible response.\\
 
 \subsubsection{Data type preservation}
 The original type of the data segment is present inside the header $($see Table ~\ref{fig:undergr0und_header}$)$ to accurately reconstruct sent data on the other end. JSON\cite{JSON:T. Bray Ed.} is used to transfer lists and dictionaries, and regular ASCII encoded strings are utilized to transfer integers, floats, null/none types and strings.
 
 \subsection{behem0th}
-behem0th\cite{behem0th:Christoph Heiss} is a continuous network file synchronization protocol developed out of the need for an embeddable solution that would not require an additional background program to be present on the system running Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, instead utilizing its plugin environment. It uses a client-server networking model without peer-to-peer capabilities to stay in line with undergr0und. It uses regular sockets instead of WebSockets\cite{The WebSocket Protocol:A. Melnikov} because the in-browser components of fl0w\cite{fl0w:Philip Trauner} never interacts with it. The file-system is monitored using the watchdog\cite{watchdog:Yesudeep Mangalapilly} library.\\
+behem0th\cite{behem0th:Christoph Heiss} is a continuous network file synchronization protocol developed out of the need for an embeddable solution that would not require an additional background program to be present on the system running Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, instead utilizing its plugin environment. \\It uses a client-server networking model without peer-to-peer capabilities to stay in line with undergr0und. It uses regular sockets instead of WebSockets\cite{The WebSocket Protocol:A. Melnikov} because the in-browser components of fl0w\cite{fl0w:Philip Trauner} never interacts with it. The file-system is monitored using the watchdog\cite{watchdog:Yesudeep Mangalapilly} library.\\
 
 \subsubsection{Synchronization}
 On startup, behem0th\cite{behem0th:Christoph Heiss} synchronizes files based on their last modification time and MD5 hash. After that, files get synchronized to other clients as soon as a file-system event happens. Synchronization conflicts are resolved on the server and it is possible to use behem0th\cite{behem0th:Christoph Heiss} with a theoretically indefinite amount of clients.\\
@@ -179,7 +179,7 @@ Although MD5 is deprecated and known to suffers from extensive vulnerabilities, 
 
 
 \subsection{dashb0ard}
-dashb0ard\cite{dashb0ard:Sebastian Schaffler} is a single-page web front-end designed to manage the fl0w\cite{fl0w:Philip Trauner} fleet. It can be used to configure connected controllers and obtain sensor readouts as well as debug logs. It utilities the JavaScript version of undergr0und to retrieve data from fl0w\cite{fl0w:Philip Trauner}, Vue.js\cite{Vue:Evan You} for its user interface, Bootstrap 3\cite{Bootstrap 3:Twitter Inc.} as a design baseline, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for additional DOM manipulation.
+dashb0ard\cite{dashb0ard:Sebastian Schaffler} is a single-page web front-end designed to manage the fl0w\cite{fl0w:Philip Trauner} fleet.\\ It can be used to configure connected controllers and obtain sensor readouts as well as debug logs. \\It utilities the JavaScript version of undergr0und to retrieve data from fl0w\cite{fl0w:Philip Trauner}, Vue.js\cite{Vue:Evan You} for its user interface, Bootstrap 3\cite{Bootstrap 3:Twitter Inc.} as a design baseline, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for additional DOM manipulation.
 
 \begin{figure}[H]
 \centering
@@ -203,7 +203,7 @@ fl0ws\cite{fl0w:Philip Trauner} networking model allows for the management of mu
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{edit0r}
-\caption{Robot management interface in Sublime Text 3\cite{Sublime Text 3:Sublime HQ}}
+\caption{edit0rs\cite{edit0r:Philip Trauner} robot management interface in Sublime Text 3\cite{Sublime Text 3:Sublime HQ}}
 \label{fig:robot_management}
 \end{figure}
 
@@ -218,13 +218,16 @@ In-line sensor readouts can be toggled on a per view basis with a keyboard short
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{sensor-readouts}
-\caption{Inline sensor-readouts in Sublime Text 3\cite{Sublime Text 3:Sublime HQ}}
+\caption{edit0rs\cite{edit0r:Philip Trauner} inline sensor-readouts in Sublime Text 3\cite{Sublime Text 3:Sublime HQ}}
 \label{fig:inline_sensor_readouts}
 \end{figure}
 
 
 \subsection{r0adrunner}
-r0adrunner is the installer of fl0w\cite{fl0w:Philip Trauner}. It is built to mimic a Wallaby\cite{Wallaby Controller:KIPR} controller software update to remain compatible with the preexisting update functionality found in Harrogate\cite{Harrogate:KIPR}. It is implemented in Python\cite{Python:Python Foundation} 2.7, which is already installed on all Wallaby\cite{Wallaby Controller:KIPR} controllers but because fl0w\cite{fl0w:Philip Trauner} utilizes features of Python\cite{Python:Python Foundation} 3.3 it installs a full-fledged precompiled version of Python\cite{Python:Python Foundation} 3.6.0. It also changes the Wallaby\cite{Wallaby Controller:KIPR} hostname to their unique manufacturing ID because fl0w\cite{fl0w:Philip Trauner} utilizes hostnames to represent controllers in its user facing components. r0adrunner is distributed as an archive that has to be copied to an USB storage medium.
+r0adrunner is the installer of fl0w\cite{fl0w:Philip Trauner}. \\It is built to mimic a Wallaby\cite{Wallaby Controller:KIPR} controller software update to remain compatible with the preexisting update functionality found in Harrogate\cite{Harrogate:KIPR}. It is implemented in Python\cite{Python:Python Foundation} 2.7, which is already installed on all Wallaby\cite{Wallaby Controller:KIPR} controllers but because fl0w\cite{fl0w:Philip Trauner} utilizes features of Python\cite{Python:Python Foundation} 3.3 it installs a full-fledged precompiled version of Python\cite{Python:Python Foundation} 3.6.0. \\It also changes the Wallaby\cite{Wallaby Controller:KIPR} hostname to their unique manufacturing ID because fl0w\cite{fl0w:Philip Trauner} utilizes hostnames to represent controllers in its user facing components. r0adrunner is distributed as an archive that has to be copied to an USB storage medium.
+
+\subsection{disc0very}
+
 
 \subsection{fl0w}
 fl0w\cite{fl0w:Philip Trauner} itself is the combination of all other components split into Wallaby\cite{Wallaby Controller:KIPR} client and server.\\
@@ -238,7 +241,7 @@ In that situation the start is interrupted, the Wallaby\cite{Wallaby Controller:
 
 \section{Conclusion}
 
-After prolonged testing it was deemed reasonable to claim that fl0w\cite{fl0w:Philip Trauner} can improve the robotics development work-flow on Wallaby\cite{Wallaby Controller:KIPR} controllers.
+After prolonged testing it was deemed reasonable to claim that fl0w\cite{fl0w:Philip Trauner} can improve the Botball development work-flow on Wallaby\cite{Wallaby Controller:KIPR} controllers.
 
 Networking boilerplate code can be cut down drastically with a fitting networking solution already in place.
 
