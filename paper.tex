@@ -77,12 +77,15 @@ showstringspaces=false
 
 \begin{document}
 
+
+
 \title{fl0w - a development environment for the\\ KIPR Wallaby}
-\author{\IEEEauthorblockN{Philip Trauner, Christoph Heiss, Sebastian Schaffler, Nico Kratky, Nico Leidenfrost, Christine Zeh, Sascha Zemann}
+\author{\IEEEauthorblockN{Philip Trauner, Christoph Heiss}
 \IEEEauthorblockA{Department for Computer Science\\
 Secondary Technical College\\
 Wiener Neustadt, Austria\\
-Email: philip.trauner@arztpraxis.io, me@christoph-heiss.me, se.schaffler@gmail.com, \\nico@nicokratky.me, leidenfrost.nico@gmail.com, zeh.chrisi@gmail.com, sascha.zemann@gmail.com}
+Email: philip.trauner@arztpraxis.io, me@christoph-heiss.me}
+Affiliated Authors: Sebastian Schaffler, Nico Kratky, Nico Leidenfrost, Christine Zeh, Sascha Zemann
 }
 \maketitle
 
@@ -98,10 +101,10 @@ file synchronization, networking, LAN discovery, development environment, monito
 
 
 \section{Introduction}
-fl0w\cite{fl0w:Philip Trauner} was developed out of a need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, programming as well as robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, and a browser-based front-end.
+fl0w\cite{fl0w:Philip Trauner} was developed out of the need for a fast, reliable and wireless workflow solution that can compete with the currently available offerings like Harrogate\cite{Harrogate:KIPR}. Its goals are to transform the connected controllers into a redundant fleet of logical units that share the same binaries and source code, real-time in-line sensor readouts, programming as well as robot management inside Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, and a browser-based front-end.
 
 \section{Implementation}
-All fl0w\cite{fl0w:Philip Trauner} components emphasize shared code and are therefor written in Python\cite{Python:Python Foundation} 3.3.6 to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. \\Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby\cite{Wallaby Controller:KIPR} controller with acceptable speed. A pre-compiled version of Python is bundled with the fl0w installer, r0adrunner, because it is not present on the Wallaby by default. \\All fl0w components are designed as libraries to allow for integration into other projects. fl0w utilities a client-server networking model with random server assignment. Client-server was chosen because the server can act as a data source for all clients.
+All fl0w\cite{fl0w:Philip Trauner} components emphasize shared code and are therefor written in Python\cite{Python:Python Foundation} 3.3.6 to remain compatible with the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin environment. \\Python was chosen as the implementation language for fl0w because of its rich standard library and its lightweight virtual machine that can run on a Wallaby\cite{Wallaby Controller:KIPR} controller with acceptable speed. A pre-compiled version of Python is bundled with the fl0w installer, r0adrunner, because it is not present on the Wallaby by default. \\All fl0w components are designed as libraries to allow for integration into other projects. fl0w utilizes a client-server networking model with random server assignment. Client-server was chosen because the server can act as a data source for all clients and logic can be clearly separated.
 
 \section{Components}
 
@@ -120,10 +123,10 @@ It automatically converts data into a transferable format and prepends binary he
 \end{table}
 
 
-The Python\cite{Python:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript\cite{ECMAScript:Ecma} version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov} in arraybuffer mode. It was created because the requirements for fl0ws\cite{fl0w:Philip Trauner} network protocol specification changed constantly and a dynamic approach to networking was required. Instead of one monolithic network protocol, undergr0und emphasizes small sub protocols. undergr0und manages itself through its own concepts.\\
+The Python\cite{Python:Python Foundation} version is built on top of a fork of ws4py\cite{ws4py:Philip Trauner} and the JavaScript\cite{ECMAScript:Ecma} version utilizes regular WebSockets\cite{The WebSocket Protocol:A. Melnikov} in arraybuffer mode. It was created because the requirements for fl0ws\cite{fl0w:Philip Trauner} network protocol specification changed constantly and a dynamic approach to networking was required. Instead of one monolithic network protocol, undergr0und emphasizes small sub protocols. undergr0und manages itself through its own concepts by transmitting the initial handshake and metadata on a route.\\
 
 \subsubsection{undergr0und.js}
-undergr0und.js\cite{undergr0und.js:Philip Trauner} is the feature complete client-side JavaScript\cite{ECMAScript:Ecma} port of undergr0und\cite{undergr0und:Philip Trauner} that was required for dashb0ard\cite{dashb0ard:Sebastian Schaffler}, the browser-based front-end for fl0w\cite{fl0w:Philip Trauner}. \\It utilizes node-jspack\cite{node-jspack:Peter Griess} to unpack the binary messages it receives from the undergr0und server. It is based on the Python\cite{Python:Python Foundation} version but does not implement the server because there is currently no need for that functionality. \\undergr0und.js can be used in Node.js\cite{Node.js:Node.js Foundation} as well as browsers that support WebSockets\cite{The WebSocket Protocol:A. Melnikov}. browserify\cite{browserify:James Halliday} is used to create the browser version.\\
+undergr0und.js\cite{undergr0und.js:Philip Trauner} is the feature complete client-side JavaScript\cite{ECMAScript:Ecma} port of undergr0und\cite{undergr0und:Philip Trauner} that was required for dashb0ard\cite{dashb0ard:Sebastian Schaffler}, the browser-based front-end for fl0w\cite{fl0w:Philip Trauner}. It utilizes node-jspack\cite{node-jspack:Peter Griess} to unpack the binary messages it receives from the undergr0und server. It is based on the Python\cite{Python:Python Foundation} version but does not implement the server because there is currently no need for that functionality. \\undergr0und.js can be used in Node.js\cite{Node.js:Node.js Foundation} as well as browsers that support WebSockets\cite{The WebSocket Protocol:A. Melnikov}. browserify\cite{browserify:James Halliday} is used to create the browser version.\\
 
 \subsubsection{Exchange table}
 To reduce the required additional bandwidth per message that is introduced with variable character count routes, a numbered route lookup table is generated on startup by clients and the server. Before any communication takes place these lookup tables are exchanged. Route ID 0 is reserved for self management purposes.\\
@@ -139,14 +142,15 @@ To reduce the required additional bandwidth per message that is introduced with 
 \caption{Creation of exchange maps used to lower bandwidth requirements}
 \end{figure}
 
-\subsubsection{Route}
+\subsubsection{Connection constructs}
+\paragraph{Route}
 A client$\,\to\,$server / server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"send"} call.
 
-\subsubsection{Pipe}
+\paragraph{Pipe}
 A client$\,\to\,$server$\,\to\,$client construct. Invoked with the {\color{deepgreen}"pipe"} call. \\Clients can be targeted with unique IDs that are generated randomly for all connected peers by the server. There is no predefined mechanism in the network protocol that exposed these peer IDs, the application using undergr0und\cite{undergr0und:Philip Trauner} has to provide a way of making them available. This approach allows for more flexibility if additional peer-metadata has to be provided. \\Pipe messages are packaged inside regular route messages with additional headers in the data segment. A server route called {\color{deepgreen}"pipe"} unpacks the regular and the extended headers and forwards the message to the targeted peer. The original sender ID is always included for a possible response.\\
 
 \subsubsection{Data type preservation}
-The original type of the data segment is present inside the header $($see Table ~\ref{fig:undergr0und_header}$)$ to accurately reconstruct sent data on the other end. JSON\cite{JSON:T. Bray Ed.} is used to transfer lists and dictionaries, and regular ASCII encoded strings are utilized to transfer integers, floats, null/none types and strings. JSON was chosen because it can be serialized and parsed by Python\cite{Python:Python Foundation} as well as JavaScript\cite{ECMAScript:Ecma}. 
+The original type of the data segment is present inside the header $($see Table ~\ref{fig:undergr0und_header}$)$ to accurately reconstruct sent data on the other end. JSON\cite{JSON:T. Bray Ed.} is used to transfer lists and dictionaries, and regular ASCII encoded strings are utilized to transfer integers, floats, null/none types and strings. 
 
 \subsection{behem0th}
 behem0th\cite{behem0th:Christoph Heiss} is a continuous network file synchronization protocol developed out of the need for an embeddable solution that would not require an additional background program to be present on the system running Sublime Text 3\cite{Sublime Text 3:Sublime HQ}, instead utilizing its plugin environment. \\It uses a client-server networking model without peer-to-peer capabilities to stay in line with undergr0und. It uses regular sockets instead of WebSockets\cite{The WebSocket Protocol:A. Melnikov} because the in-browser components of fl0w\cite{fl0w:Philip Trauner} never interacts with it. The file-system is monitored using the watchdog\cite{watchdog:Yesudeep Mangalapilly} library.\\
@@ -155,7 +159,7 @@ behem0th\cite{behem0th:Christoph Heiss} is a continuous network file synchroniza
 On startup, behem0th\cite{behem0th:Christoph Heiss} synchronizes files based on their last modification time and MD5 hash. After that, files get synchronized to other clients as soon as a file-system event happens. Synchronization conflicts are resolved on the server and it is possible to use behem0th with a theoretically indefinite amount of clients.\\
 
 \subsubsection{Transfer}
-behem0th\cite{behem0th:Christoph Heiss} neither sends nor receives files as a whole, instead it transmits the file as small blocks (4096 bytes), which are written to a temporary file on disk as soon as they are received. This is done to allow the transfer of large files even in very memory-constrained environments.\\
+behem0th\cite{behem0th:Christoph Heiss} neither sends nor receives files as a whole, instead it transmits the file as small blocks (4096 bytes), which are written to a temporary file on disk as soon as they are received. This is done to allow the transfer of large files even in very random-access-memory-constrained environments.\\
 
 \subsubsection{Protocol}
 behem0th\cite{behem0th:Christoph Heiss} is independent from underg0und and defines its own network protocol. It is completely text-based, uses UTF-8 for character encoding and JSON\cite{JSON:T. Bray Ed.} as format encoding. behem0th is designed around 'requests' $($see Figure ~\ref{fig:behem0th_request}$)$ and 'routes'. Each request is a JSON-formatted string and separated by a newline.
@@ -174,12 +178,12 @@ behem0th\cite{behem0th:Christoph Heiss} is independent from underg0und and defin
 
 A route can also send additional data if needed (a 'payload'). For binary data, base64\cite{Base64:S. Josefsson} encoding is used. After each payload, there is a newline to delimit the payload and the next request. \\
 
-\subsubsection{Security}
-Although MD5 is deprecated and known to suffers from extensive vulnerabilities, behem0th\cite{behem0th:Christoph Heiss} is designed to only run in a local network, which is controlled by the users of fl0w\cite{fl0w:Philip Trauner}. This assumption also simplifies the implementation greatly.
+\subsubsection{Security concerns}
+Although MD5 is deprecated and known to suffer from extensive vulnerabilities, behem0th\cite{behem0th:Christoph Heiss} is designed to only run in a local network, which is controlled by the users of fl0w\cite{fl0w:Philip Trauner}. This assumption also simplifies the implementation greatly.
 
 
 \subsection{dashb0ard}
-dashb0ard\cite{dashb0ard:Sebastian Schaffler} is a single-page web front-end designed to manage the fl0w\cite{fl0w:Philip Trauner} fleet.\\ It can be used to configure connected controllers and obtain sensor readouts as well as debug logs. \\It utilities undergr0und.js\cite{undergr0und.js:Philip Trauner} to retrieve data from fl0w, Vue.js\cite{Vue:Evan You} for its user interface, Bootstrap 3\cite{Bootstrap 3:Twitter Inc.} as a design baseline, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for additional DOM manipulation.
+dashb0ard\cite{dashb0ard:Sebastian Schaffler} is a single-page web application designed to manage the fl0w\cite{fl0w:Philip Trauner} fleet.\\ It can be used to configure connected controllers and obtain sensor readouts as well as debug logs. \\It utilizes undergr0und.js\cite{undergr0und.js:Philip Trauner} to retrieve data from fl0w, Vue.js\cite{Vue:Evan You} for its user interface, Bootstrap 3\cite{Bootstrap 3:Twitter Inc.} as a design baseline, Flot\cite{Flot:David Schnur} to display graphs and jQuery\cite{jQuery:jQuery Foundation} for additional DOM manipulation.
 
 \begin{figure}[H]
 \centering
@@ -195,7 +199,7 @@ dashb0ard\cite{dashb0ard:Sebastian Schaffler} is a single-page web front-end des
 \label{fig:dashb0ard_sensor}
 \end{figure}
 \subsection{edit0r}
-edit0r\cite{edit0r:Philip Trauner} is the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin. It is modeled as a fl0w\cite{fl0w:Philip Trauner} client and allows for remote robot management, source code synchronization as well as in-line sensor readouts. \\It also provides quick access to dashb0ard\cite{dashb0ard:Sebastian Schaffler}, which is required because the IP addresses of controllers are not always static. behem0th\cite{behem0th:Christoph Heiss} is embedded into edit0r and enables the source code synchronization. In its current form only C programs are supported.\\
+edit0r\cite{edit0r:Philip Trauner} is the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin. It is modeled as a fl0w\cite{fl0w:Philip Trauner} client and allows for remote robot management, source code synchronization as well as in-line sensor readouts. \\It also provides quick access to dashb0ard\cite{dashb0ard:Sebastian Schaffler}, which is required because the IP addresses of controllers are not always static. behem0th\cite{behem0th:Christoph Heiss} is embedded into edit0r and enables the source code synchronization. In its current form only C programs are supported because the folder structure for Python\cite{Python:Python Foundation} programs in Harrogate\cite{Harrogate:KIPR} is different.\\
 
 \subsubsection{Robot selection}
 fl0ws\cite{fl0w:Philip Trauner} networking model allows for the management of multiple controllers without a direct connection to them. The controller hostname is utilised to identify the robots in the user-interface. Controllers can be selected to obtain additional functionality such as in-line sensor readouts and keyboard shortcuts.\\
@@ -208,12 +212,12 @@ fl0ws\cite{fl0w:Philip Trauner} networking model allows for the management of mu
 \end{figure}
 
 \subsubsection{Robot management}
-Botball programs can be started (keyboard shortcut: F8) and/or stopped (keyboard shortcut: F9).
-Additionally, edit0r\cite{edit0r:Philip Trauner} allows for modification of the controller hostname, playback of a sound for identification purposes, listing of running processes, power management functionality (reboot, shutdown) and running programs.\\
+Botball programs can be started and/or stopped.
+Additionally, edit0r\cite{edit0r:Philip Trauner} allows for modification of the controller hostname, playback of a sound for identification purposes, listing of running processes, and power management functionality (reboot, shutdown).\\
 
 \subsubsection{In-line sensor readouts}
-Invocations of the functions "analog" and "digital" are located every time the content of a view changes and the parameters of the calls are grouped across views. edit0r\cite{edit0r:Philip Trauner} subscribes to all required sensor ports by requesting them from the currently selected controller. The controller keeps track of all subscriptions to sensors and continuously transmits the appropriate values to the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin. \\Sublime Text 3 phantoms are created as soon as new sensor values are available. This approach has the disadvantage of higher than usual processor utilization by edit0r, because phantoms were primarily designed to display infrequently updating content. To partially circumvent this, sensor readouts can be disabled and are not enabled by default.\\
-In-line sensor readouts can be toggled on a per view basis with a keyboard shortcut (default F10).\\
+Invocations of the functions "analog" and "digital", functions typically used to obtain sensor values, are located every time the content of a view changes and the parameters of the calls are grouped across views. edit0r\cite{edit0r:Philip Trauner} subscribes to all required sensor ports by requesting them from the currently selected controller. The controller keeps track of all subscriptions to sensors and continuously transmits the appropriate values to the Sublime Text 3\cite{Sublime Text 3:Sublime HQ} plugin. \\Sublime Text 3 phantoms, which are in-line fields to display data within a text view, are created as soon as new sensor values are available. This approach has the disadvantage of higher than usual processor utilization by edit0r, because phantoms were primarily designed to display infrequently updating content. To partially circumvent this, sensor readouts can be disabled and are not enabled by default.\\
+In-line sensor readouts can be toggled on a per view basis with a keyboard shortcut (default.\\
 
 \begin{figure}[H]
 \centering
@@ -271,7 +275,7 @@ There is a high amount of complexity involved when performing continuous file-sy
 Support for Python\cite{Python:Python Foundation} as a robot programming language as well as basic remote procedure call functionality is the next development goal.
 
 \section*{Acknowledgment}
-The authors would like to thank the robotics team robot0nfire: Nico Kratky, Nico Leidenfrost, Sebastian Schaffler, Christine Zeh, Sascha Zemann;\\ Dr. Michael Stifter for making the existence of our team possible; Daniel Maximilian Swoboda for answering all paper related questions; the KIPR development team without whom the Wallaby\cite{Wallaby Controller:KIPR} Controller would not exist.
+The authors would like to thank Dr. Michael Stifter for making the existence of our robotics team possible, Daniel Maximilian Swoboda for answering all paper related questions, and the KIPR development team without whom the Wallaby\cite{Wallaby Controller:KIPR} Controller would not exist.
 
 \begin{thebibliography}{1}
 
@@ -309,6 +313,10 @@ Ecma International, \emph{ECMAScript}, \\\url{https://www.ecma-international.org
 A. Melnikov, \emph{The WebSocket Protocol}, \url{https://tools.ietf.org/html/rfc6455},\\ request for comment,
 accessed February 9th 2017
 
+\bibitem{dashb0ard:Sebastian Schaffler}
+Sebastian Schaffler, Philip Trauner, \emph{dashb0ard}, \url{https://github.com/robot0nfire/dashb0ard}, source code,
+accessed March 16th 2017
+
 \bibitem{undergr0und.js:Philip Trauner}
 Philip Trauner, \emph{undergr0und},\\ \url{https://github.com/robot0nfire/undergr0und.js}, source code, \\accessed February 9th 2017
 
@@ -328,6 +336,10 @@ accessed February 9th 2017
 T. Bray, Ed., \emph{JSON}, \url{https://tools.ietf.org/html/rfc7159},\\ request for comment,
 accessed February 9th 2017
 
+\bibitem{behem0th:Christoph Heiss}
+Christoph Heiss, \emph{behem0th}, \url{https://github.com/robot0nfire/behem0th},\\ source code,
+accessed February 9th 2017
+
 \bibitem{watchdog:Yesudeep Mangalapilly}
 Yesudeep Mangalapilly, \emph{watchdog}, \url{https://github.com/gorakhargosh/watchdog}, source code,
 accessed February 9th 2017
@@ -335,10 +347,6 @@ accessed February 9th 2017
 \bibitem{Base64:S. Josefsson}
 S. Josefsson, \emph{Base64}, \url{https://tools.ietf.org/html/rfc4648}, \\ request for comment,
 accessed March 22nd 2017
-
-\bibitem{dashb0ard:Sebastian Schaffler}
-Sebastian Schaffler, Philip Trauner, \emph{dashb0ard}, \url{https://github.com/robot0nfire/dashb0ard}, source code,
-accessed March 16th 2017
 
 \bibitem{Vue:Evan You}
 Evan You, \emph{Vue.js}, \url{https://vuejs.org/},\\ product page,
@@ -365,9 +373,6 @@ Christoph Heiss, \emph{disc0very}, \url{https://github.com/robot0nfire/fl0w/blob
 \bibitem{UDP:J. Postel}
 J. Postel, \emph{UDP}, \url{https://www.ietf.org/rfc/rfc768.txt},\\ request for comment, accessed March 30th 2017
 
-\bibitem{behem0th:Christoph Heiss}
-Christoph Heiss, \emph{behem0th}, \url{https://github.com/robot0nfire/behem0th},\\ source code,
-accessed February 9th 2017
 
 \end{thebibliography}
 
