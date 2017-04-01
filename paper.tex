@@ -158,7 +158,7 @@ On startup, behem0th\cite{behem0th:Christoph Heiss} synchronizes files based on 
 behem0th\cite{behem0th:Christoph Heiss} neither sends nor receives files as a whole, instead it transmits the file as small blocks (4096 bytes), which are written to a temporary file on disk as soon as they are received. This is done to allow the transfer of large files even in very memory-constrained environments.\\
 
 \subsubsection{Protocol}
-behem0th\cite{behem0th:Christoph Heiss} is independent from underg0und and defines its own network protocol. It is completely text-based, uses UTF-8\cite{UTF-8:F. Yergeau} for character encoding and JSON\cite{JSON:T. Bray Ed.} as format encoding. behem0th is designed around 'requests' $($see Figure ~\ref{fig:behem0th_request}$)$ and 'routes'. Each request is a JSON-formatted string and separated by a newline.
+behem0th\cite{behem0th:Christoph Heiss} is independent from underg0und and defines its own network protocol. It is completely text-based, uses UTF-8 for character encoding and JSON\cite{JSON:T. Bray Ed.} as format encoding. behem0th is designed around 'requests' $($see Figure ~\ref{fig:behem0th_request}$)$ and 'routes'. Each request is a JSON-formatted string and separated by a newline.
 
 \begin{figure}[H]
 \centering
@@ -231,7 +231,7 @@ disc0very\cite{disc0very:Christoph Heiss} is the LAN discovery protocol of fl0w\
 
 
 \subsubsection{Discovery process}
-Upon launch disc0very\cite{disc0very:Christoph Heiss} listens for advertisements from an already running fl0w\cite{fl0w:Philip Trauner} server. If an advertisement is received the client-mode is engaged and a connection to the server is established. If no advertisement has been received after 2s server-mode is engaged. Server-mode can be disabled for clients that do not have the capability to become a server, for example edit0r\cite{edit0r:Philip Trauner}).
+Upon launch disc0very\cite{disc0very:Christoph Heiss} listens for advertisements from an already running fl0w\cite{fl0w:Philip Trauner} server. If an advertisement is received the client-mode is engaged and a connection to the server is established. If no advertisement has been received after 2s server-mode is engaged.
 
 \begin{figure}[H]
 \centering
@@ -276,11 +276,11 @@ The authors would like to thank the robotics team robot0nfire: Nico Kratky, Nico
 \begin{thebibliography}{1}
 
 \bibitem{fl0w:Philip Trauner}
-Philip Trauner, Christoph Heiss, Sebastian Schaffler, \emph{fl0w}, \url{https://github.com/robot0nfire/fl0w},\\ source code,
+Philip Trauner, Christoph Heiss, Sebastian Schaffler, \emph{fl0w}, \url{https://github.com/robot0nfire/fl0w}, source code,
 accessed February 9th 2017
 
 \bibitem{Harrogate:KIPR}
-KIPR, \emph{Harrogate}, \url{https://github.com/kipr/harrogate},\\ source code,
+KIPR, \emph{Harrogate}, \url{https://github.com/kipr/harrogate}, \\ source code,
 accessed February 9th 2017
 
 \bibitem{Sublime Text 3:Sublime HQ}
@@ -292,7 +292,7 @@ Python Foundation, \emph{Python}, \url{https://www.python.org},\\ project page,
 accessed February 9th 2017
 
 \bibitem{Wallaby Controller:KIPR}
-KIPR, \emph{Wallaby Controller},  \url{http://botballstore.org/product/wallaby-controller}, \\ store page, accessed February 9th 2017
+KIPR, \emph{Wallaby Controller},\\  \url{http://botballstore.org/product/wallaby-controller}, store page, accessed February 9th 2017
 
 \bibitem{undergr0und:Philip Trauner}
 Philip Trauner, \emph{undergr0und}, \url{https://github.com/robot0nfire/fl0w/wiki/undergr0und}, implementation notes,
@@ -303,8 +303,7 @@ Philip Trauner, \emph{ws4py}, \url{https://github.com/robot0nfire/ws4py},\\ sour
 accessed February 9th 2017
 
 \bibitem{ECMAScript:Ecma}
-Ecma International, \emph{ECMAScript}, \url{https://www.ecma-international.org/ecma-262/7.0/index.html},\\ language specification,
-accessed February 12th 2017
+Ecma International, \emph{ECMAScript}, \\\url{https://www.ecma-international.org/ecma-262/7.0/index.html}, language specification, accessed February 12th 2017
 
 \bibitem{The WebSocket Protocol:A. Melnikov}
 A. Melnikov, \emph{The WebSocket Protocol}, \url{https://tools.ietf.org/html/rfc6455},\\ request for comment,
@@ -333,10 +332,6 @@ accessed February 9th 2017
 Yesudeep Mangalapilly, \emph{watchdog}, \url{https://github.com/gorakhargosh/watchdog}, source code,
 accessed February 9th 2017
 
-\bibitem{UTF-8:F. Yergeau}
-F. Yergeau, \emph{UTF-8}, \url{https://tools.ietf.org/html/rfc3629},\\ request for comment,
-accessed March 22nd 2017
-
 \bibitem{Base64:S. Josefsson}
 S. Josefsson, \emph{Base64}, \url{https://tools.ietf.org/html/rfc4648}, \\ request for comment,
 accessed March 22nd 2017
@@ -362,10 +357,10 @@ jQuery Foundation, \emph{jQuery}, \url{https://jquery.com/},\\ product page,
 accessed February 9th 2017
 
 \bibitem{edit0r:Philip Trauner}
-Philip Trauner, \emph{edit0r}, \url{https://github.com/robot0nfire/fl0w/tree/master/Sublime/fl0w},\\ source code, accessed February 9th 2017
+Philip Trauner, \emph{edit0r}, \url{https://github.com/robot0nfire/fl0w/tree/master/Sublime/fl0w}, source code, accessed February 9th 2017
 
 \bibitem{disc0very:Christoph Heiss}
-Christoph Heiss, \emph{disc0very}, \url{https://github.com/robot0nfire/fl0w/blob/master/Shared/Disc0very.py},\\ source code, accessed March 30th 2017
+Christoph Heiss, \emph{disc0very}, \url{https://github.com/robot0nfire/fl0w/blob/master/Shared/Disc0very.py}, source code, accessed March 30th 2017
 
 \bibitem{UDP:J. Postel}
 J. Postel, \emph{UDP}, \url{https://www.ietf.org/rfc/rfc768.txt},\\ request for comment, accessed March 30th 2017
